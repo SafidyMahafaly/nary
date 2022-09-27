@@ -28,7 +28,7 @@ Route::group(['middleware' => ['auth','admin']],function(){
     Route::resource('/departement',DepartementController::class);
     Route::get('/DeleteDepartement/{id}',[DepartementController::class,'destroy'])->name('delete');
     Route::get('/detail_departement/{id}',[DepartementController::class,'detail'])->name('detail');
-    Route::resource('/employer',EmployerController::class);
+    Route::post('/employerC',[EmployerController::class,'store'])->name('employer.gor');
     Route::get('/change',[EmployerController::class,'change'])->name('change');
     Route::get('/changeD',[EmployerController::class,'del'])->name('del');
     Route::resource('/type',TypeController::class);
