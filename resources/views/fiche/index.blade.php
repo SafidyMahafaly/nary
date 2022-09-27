@@ -13,7 +13,7 @@
                           <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Situation administrative</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Affectation actuelle</button>
+                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Affectation </button>
                         </li>
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Titre ou diplôme</button>
@@ -129,7 +129,7 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <form action="{{route('fiche.situation')}}" method="POST">
                             @csrf
                             <input type="hidden" name="employer_id" value="{{$info->id}}">
@@ -138,20 +138,20 @@
                             <div class="row">
                                 <div class="input-groupe mt-3">
                                     <label for="Nom">Date d'entrée dans l'administration  :</label>
-                                    <input type="date" name="DateEntre" value="" class="form-control">
+                                    <input type="date" name="DateEntre" value="" class="form-control" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Corps :</label>
-                                        <input type="text" name="Corps" value="" class="form-control" >
+                                        <input type="text" name="Corps" value="" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">depuis le :</label>
-                                        <input type="date" name="DateCorps" value="" class="form-control">
+                                        <input type="date" name="DateCorps" value="" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                                 <div class="col-md-8">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Grade actuel :</label>
-                                        <select name="Grade" id="">
+                                        <select name="Grade" id="" required>
                                             <option value="" selected hidden> Sélectionez votre grade actuel</option>
                                             <option value="Stagiaire">Stagiaire</option>
                                             <option value="Autre">Autre</option>
@@ -169,14 +169,14 @@
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">depuis le :</label>
-                                        <input type="date" name="DateGrade" value="" class="form-control">
+                                        <input type="date" name="DateGrade" value="" class="form-control" required>
                                     </div>
                                 </div>
 
                             </div>
                             <div class="row p-2">
                                 <label for="Nom">Programme:</label>
-                                    <select name="Programme" id="" class="">
+                                    <select name="Programme" id="" class="" required>
                                         <option value="" selected hidden> Sélectionez votre programme</option>
                                         <option value="INDUSTRIE">INDUSTRIE</option>
                                         <option value="COMMERCE">COMMERCE</option>
@@ -189,8 +189,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
+
+                        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row p-2">
+                                <div class="col-md-12">
+                                    <h1>AFFECTATION ACTUELLE</h1>
+                                    <form action="{{route('fiche.affectation')}}" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <input type="hidden" name="employer_id" value="{{$info->id}}">
+                                        <input type="hidden" name="departement_id" value="{{$info->departement_id}}">
+                                        <input type="hidden" name="type_id" value="{{$info->Type_id}}">
+                                        <div class="col-md-8 mt-3">
+                                            <div class="input-groupe">
+                                                <label for="">Diréction :</label>
+                                                <input type="text" name="direction" class="form-control" id="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-groupe mt-3">
+                                                <label for="">Depuis le:</label>
+                                                <input type="date" name="dateEntre" class="form-control" id="" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-groupe">
+                                            <label for="">Service :</label>
+                                            <input type="text" name="service" class="form-control" id="" required>
+                                        </div>
+                                        <div class="input-groupe">
+                                            <label for="">Fonction exercé :</label>
+                                            <input type="text" name="fonction" class="form-control" id="" required>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                       </div>
                 </div>
