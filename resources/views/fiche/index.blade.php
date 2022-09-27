@@ -7,13 +7,13 @@
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Etat civil</button>
+                          <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Etat civil</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Situation administrative</button>
+                          <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Situation administrative</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Affectation actuelle</button>
+                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Affectation </button>
                         </li>
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Titre ou diplôme</button>
@@ -32,24 +32,30 @@
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active p-3" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade  p-3" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <form action="{{route('fiche.store')}}" method="POST">
+                            @csrf
                             <div class="row">
+
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Matricule :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="hidden" name="employer_id" value="{{$info->id}}">
+                                        <input type="hidden" name="departement_id" value="{{$info->departement_id}}">
+                                        <input type="hidden" name="type_id" value="{{$info->Type_id}}">
+                                        <input type="text" value="{{$info->matricule}}" name="Matricule" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Nom :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" value="{{$info->nom}}" name="Noms" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Prenoms :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" value="{{$info->prenom}}" name="Prenoms" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -57,13 +63,13 @@
                                 <div class="col-md-6">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">date de naissance :</label>
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="DateNaiss" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">lieu :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="Lieu" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -71,19 +77,19 @@
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">CIN :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="CIN" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">du :</label>
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="DateCIN" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Duplicata du :</label>
-                                        <input type="date" class="form-control">
+                                        <input type="date" name="Duplicata" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -91,13 +97,13 @@
                                 <div class="col-md-6">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Fils de:</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="Pere" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">et de :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="Mere" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -105,27 +111,125 @@
                                 <div class="col-md-6">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Adresse :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="Adresse" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="input-groupe mt-3">
                                         <label for="Nom">Telephone :</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" name="Telephone" value="{{$info->telephone}}" class="form-control">
                                     </div>
                                 </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-12">
-                                    <button class="btn btn-outline-primary float-end"> Sauvegarder </button>
+                                    <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                </form>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
+                        <div class="tab-pane fade " id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <form action="{{route('fiche.situation')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="employer_id" value="{{$info->id}}">
+                            <input type="hidden" name="departement_id" value="{{$info->departement_id}}">
+                            <input type="hidden" name="type_id" value="{{$info->Type_id}}">
+                            <div class="row">
+                                <div class="input-groupe mt-3">
+                                    <label for="Nom">Date d'entrée dans l'administration  :</label>
+                                    <input type="date" name="DateEntre" value="" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-groupe mt-3">
+                                        <label for="Nom">Corps :</label>
+                                        <input type="text" name="Corps" value="" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-groupe mt-3">
+                                        <label for="Nom">depuis le :</label>
+                                        <input type="date" name="DateCorps" value="" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-groupe mt-3">
+                                        <label for="Nom">Grade actuel :</label>
+                                        <select name="Grade" id="" required>
+                                            <option value="" selected hidden> Sélectionez votre grade actuel</option>
+                                            <option value="Stagiaire">Stagiaire</option>
+                                            <option value="Autre">Autre</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-groupe mt-3">
+                                        <label for="Nom">depuis le :</label>
+                                        <input type="date" name="DateGrade" value="" class="form-control" required>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row p-2">
+                                <label for="Nom">Programme:</label>
+                                    <select name="Programme" id="" class="" required>
+                                        <option value="" selected hidden> Sélectionez votre programme</option>
+                                        <option value="INDUSTRIE">INDUSTRIE</option>
+                                        <option value="COMMERCE">COMMERCE</option>
+                                    </select>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 
+
+                        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row p-2">
+                                <div class="col-md-12">
+                                    <h1>AFFECTATION ACTUELLE</h1>
+                                    <form action="{{route('fiche.affectation')}}" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <input type="hidden" name="employer_id" value="{{$info->id}}">
+                                        <input type="hidden" name="departement_id" value="{{$info->departement_id}}">
+                                        <input type="hidden" name="type_id" value="{{$info->Type_id}}">
+                                        <div class="col-md-8 mt-3">
+                                            <div class="input-groupe">
+                                                <label for="">Diréction :</label>
+                                                <input type="text" name="direction" class="form-control" id="" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="input-groupe mt-3">
+                                                <label for="">Depuis le:</label>
+                                                <input type="date" name="dateEntre" class="form-control" id="" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-groupe">
+                                            <label for="">Service :</label>
+                                            <input type="text" name="service" class="form-control" id="" required>
+                                        </div>
+                                        <div class="input-groupe">
+                                            <label for="">Fonction exercé :</label>
+                                            <input type="text" name="fonction" class="form-control" id="" required>
+                                        </div>
+                                        <div class="col-md-12 mt-3">
+                                            <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                       </div>
                 </div>
@@ -135,9 +239,6 @@
     <script>
         function apina(){
             var a = document.getElementById('apina');
-
-
-
             $('#apina').append(
                 '<tr class="text-center midi">\
                     <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>\
