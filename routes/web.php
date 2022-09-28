@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth','employer']],function(){
     Route::post('/diplome',[FicheController::class,'diplome'])->name('fiche.diplome');
     Route::post('/stage',[FicheController::class,'stage'])->name('fiche.stage');
     Route::post('/grade',[FicheController::class,'grade'])->name('fiche.grade');
+    Route::post('/civile',[FicheController::class,'civile'])->name('fiche.civile');
+    Route::post('/enfant',[FicheController::class,'enfant'])->name('fiche.enfant');
 });
 
 Route::group(['middleware' => ['auth','role:employer']],function(){
@@ -59,7 +61,7 @@ Route::group(['middleware' => ['auth','role:admin']],function(){
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');

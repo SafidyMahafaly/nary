@@ -10,28 +10,28 @@
                           <button class="nav-link " id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Etat civil</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Situation administrative</button>
+                          <button class="nav-link " id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Situation administrative</button>
                         </li>
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Affectation </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Titre ou diplôme</button>
+                          <button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#diplome" type="button" role="tab" aria-controls="diplome" aria-selected="false">Titre ou diplôme</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Stage et formation</button>
+                          <button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#stage" type="button" role="tab" aria-controls="stage" aria-selected="false">Stage et formation</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Distinct honorifique</button>
+                          <button class="nav-link " id="contact-tab" data-bs-toggle="tab" data-bs-target="#dis" type="button" role="tab" aria-controls="dis" aria-selected="false">Distinct honorifique</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Enfants</button>
+                          <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#famille" type="button" role="tab" aria-controls="famille" aria-selected="false">Situation Familliale</button>
                         </li>
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Autre</button>
                         </li>
                       </ul>
-                      <div class="tab-content" id="myTabContent">
+                    <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade  p-3" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <form action="{{route('fiche.store')}}" method="POST">
                             @csrf
@@ -191,7 +191,7 @@
                         </div>
 
 
-                        <div class="tab-pane fade show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="tab-pane fade " id="contact" role="tabpanel" aria-labelledby="contact-tab">
                             <div class="row p-2">
                                 <div class="col-md-12">
                                     <h1>AFFECTATION ACTUELLE</h1>
@@ -230,8 +230,222 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row p-2">
+                                <h1>AFFECTATION SUCCESIVE</h1>
+                                <form action="{{route('fiche.affectationmultiple')}}" method="POST">
+                                @csrf
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Direction</th>
+                                            <th>Service</th>
+                                            <th>Fonction exercée</th>
+                                            <th>Periode</th>
+                                            <th><a href="#" class="p-2" onclick="apina();"><i class="fa-solid fa-plus"></i></a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="apina">
+                                        <tr class="text-center">
+                                            <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->departement_id}}" name="departement_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->Type_id}}" name="type_id[]" class="form-control" readonly>
+                                            <th><input type="text" name="direction[]" required></th>
+                                            <th><input type="text" name="service[]" required></th>
+                                            <th><input type="text" name="fonction[]" required></th>
+                                            <th><input type="date" style="width: 150px" name="debut[]" required>&nbsp;au&nbsp;<input type="date" name="fin[]" style="width: 150px" required></th>
+                                            <th class="align-middle"><a href="#"><i class="fa-solid fa-trash p-2 " style="background: rgb(191, 29, 29);color:white"></i></a></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                </form>
+                                </div>
+                            </div>
                         </div>
-                      </div>
+
+                        <div class="tab-pane fade " id="diplome" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row p-2">
+                                <form action="{{route('fiche.diplome')}}" method="POST">
+                                @csrf
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Diplome - Certificat -Atestation</th>
+                                            <th>Etablissement et lieu d'ontention</th>
+                                            <th>Année d'obtention</th>
+                                            <th><a href="#" class="p-2" onclick="apinaDipl();"><i class="fa-solid fa-plus"></i></a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dipl">
+                                        <tr class="text-center ferme">
+                                            <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->departement_id}}" name="departement_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->Type_id}}" name="type_id[]" class="form-control" readonly>
+                                            <th><input type="text" name="diplome[]"  style="width: 300px" required></th>
+                                            <th><input type="text" name="etab[]" style="width: 300px" required></th>
+                                            <th><input type="date" name="obtenue[]" style="width: 300px" required></th>
+                                            <th class="align-middle"><a href="#"   disabled><i class="fa-solid fa-trash p-2" style="background: rgb(191, 29, 29);color:white"></i></a></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade " id="stage" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row p-2">
+                                <form action="{{route('fiche.stage')}}" method="POST">
+                                @csrf
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Nature</th>
+                                            <th>Objet et Domaines concernés</th>
+                                            <th>Lieu</th>
+                                            <th>Durée</th>
+                                            <th>Année</th>
+                                            <th><a href="#" class="p-2" onclick="apinaStage();"><i class="fa-solid fa-plus"></i></a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="stagee">
+                                        <tr class="text-center st">
+                                            <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->departement_id}}" name="departement_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->Type_id}}" name="type_id[]" class="form-control" readonly>
+                                            <th><input type="text" name="nature[]" required></th>
+                                            <th><input type="text" name="objet[]" required></th>
+                                            <th><input type="text" name="lieu[]" required></th>
+                                            <th><input type="text" name="dure" required></th>
+                                            <th><input type="date" name="anne" required></th>
+                                            <th class="align-middle"><a href="#"   disabled><i class="fa-solid fa-trash p-2" style="background: rgb(191, 29, 29);color:white"></i></a></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="dis" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row p-2">
+                                <form action="{{route('fiche.grade')}}" method="POST">
+                                @csrf
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>Grade</th>
+                                            <th>Obtention</th>
+                                            <th>N°Date décret</th>
+                                            <th><a href="#" class="p-2" onclick="dis();"><i class="fa-solid fa-plus"></i></a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dist">
+                                        <tr class="text-center dd">
+                                            <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->departement_id}}" name="departement_id[]" class="form-control" readonly>
+                                            <input type="hidden" value="{{$info->Type_id}}" name="type_id[]" class="form-control" readonly>
+                                            <th><input type="text" style="width: 400px" name="grade[]" required></th>
+                                            <th><input type="text" style="width: 400px" name="obtention[]" required></th>
+                                            <th><input type="date" name="date[]" required></th>
+                                            <th class="align-middle"><a href="#"   disabled><i class="fa-solid fa-trash p-2" style="background: rgb(191, 29, 29);color:white"></i></a></th>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-md-12 mt-3">
+                                    <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade show active" id="famille" role="tabpanel" aria-labelledby="contact-tab">
+                            <form action="{{route('fiche.civile')}}" method="POST">
+                            @csrf
+                            <div class="row p-2">
+                                <input type="hidden" value="{{$info->id}}" name="employer_id" class="form-control" readonly>
+                                <input type="hidden" value="{{$info->departement_id}}" name="departement_id" class="form-control" readonly>
+                                <input type="hidden" value="{{$info->Type_id}}" name="type_id" class="form-control" readonly>
+                                <div class="col-md-8">
+                                    <div class="input-groupe">
+                                        <label for="">Civilité :</label>
+                                        <select name="civile" id="" class="form-control">
+                                            <option value="" selected hidden>Sélectionez votre civilité</option>
+                                            <option value="Célibataire">Célibataire</option>
+                                            <option value="Marié(e)">Marié(e)</option>
+                                            <option value="Veuf(ve)">Veuf(ve)</option>
+                                            <option value="Divorcé(e)">Divorcé(e)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-groupe">
+                                        <label for="">Nombre d'enfant à charge :</label>
+                                        <input type="text" name="enfant">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-4" >
+                                    <h1><u> Renseignement concernant l'epouse (ou l'epoux) </u></h1>
+                                    <div class="input-groupe">
+                                        <label for="">Nom et prenoms de l'époux/épouse :</label>
+                                        <input type="text" class="form-control" name="epoux">
+                                    </div>
+                                    <div class="input-groupe">
+                                        <label for="">File (ou Fils) de :</label>
+                                        <input type="text" class="form-control" name="pere">
+                                    </div>
+                                    <div class="input-groupe">
+                                        <label for="">Et de :</label>
+                                        <input type="text" class="form-control" name="mere">
+                                    </div>
+                                    <div class="col-md-12 mt-3">
+                                        <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                    </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <h1><u> Renseignement concernant enfants </u></h1>
+                                    <form action="{{route('fiche.enfant')}}" method="POST">
+                                    @csrf
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>Nom et Prénoms</th>
+                                                        <th>Date et lieu de naissance</th>
+                                                        <th>Sexe</th>
+                                                        <th><a href="#" class="p-2" onclick="fam();"><i class="fa-solid fa-plus"></i></a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="fam">
+                                                    <tr class="text-center">
+                                                        <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>
+                                                        <input type="hidden" value="{{$info->departement_id}}" name="departement_id[]" class="form-control" readonly>
+                                                        <input type="hidden" value="{{$info->Type_id}}" name="type_id[]" class="form-control" readonly>
+                                                        <th><input name="nom[]" type="text" style="width: 400px"  class="form-control" required></th>
+                                                        <th style="display: flex"><input name="date[]" style="width: 200px" type="date" class="form-control">&nbsp; <span class="mt-2">à</span>  &nbsp;<input placeholder="lieu de naissance" type="text" name="lieu[]" style="width: 300px"  class="form-control"></th>
+                                                        <th><select name="sexe[]" id="">
+                                                            <option value="M">Homme</option>
+                                                            <option value="F">Femme</option>
+                                                        </select></th>
+                                                        <th class="align-middle"><a href="#"><i class="fa-solid fa-trash p-2 " style="background: rgb(191, 29, 29);color:white"></i></a></th>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="col-md-12 mt-3">
+                                                <button class="btn btn-outline-primary float-end" type="submit"> Sauvegarder </button>
+                                           </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -311,6 +525,28 @@
                 $(this).closest('.dd').remove()
 
             });
+        }
+
+        function fam(){
+            $('#fam').append(
+                '<tr class="text-center fax">\
+                    <input type="hidden" value="{{$info->id}}" name="employer_id[]" class="form-control" readonly>\
+                    <input type="hidden" value="{{$info->departement_id}}" name="departement_id[]" class="form-control" readonly>\
+                    <input type="hidden" value="{{$info->Type_id}}" name="type_id[]" class="form-control" readonly>\
+                    <th><input name="nom[]" type="text" style="width: 400px"  class="form-control"></th>\
+                    <th style="display: flex"><input name="date[]" style="width: 200px" type="date" class="form-control">&nbsp; <span class="mt-2">à</span>  &nbsp;<input placeholder="lieu de naissance" name="lieu[]" type="text" style="width: 300px"  class="form-control"></th>\
+                    <th><select name="sexe[]" id="">\
+                        <option value="M">Homme</option>\
+                        <option value="F">Femme</option>\
+                    </select></th>\
+                    <th class="align-middle"><a href="#" class="family"><i class="fa-solid fa-trash p-2 " style="background: rgb(191, 29, 29);color:white"></i></a></th>\
+                </tr>'
+            )
+            $('.family').click(function (e) {
+                $(this).closest('.fax').remove()
+
+            });
+
         }
     </script>
 </x-app-layout>
